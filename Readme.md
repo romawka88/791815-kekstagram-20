@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Marina Rudiy](https://up.htmlacademy.ru/javascript/20/user/791815).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Бородин](https://htmlacademy.ru/profile/id1092697).
 
 ---
 
