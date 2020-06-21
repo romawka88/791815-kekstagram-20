@@ -7,12 +7,12 @@ var userDialog = document.querySelector('.container');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 
 var pictureTemplate = document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
+    .content
+    .querySelector('.picture');
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 var getRandomElement = function (arr) {
   var arrElement = arr[Math.floor(Math.random() * arr.length)];
@@ -23,11 +23,11 @@ var getRandomElement = function (arr) {
 var photoDescription = [];
 for (var i = 0; i < 25; i++) {
   var photo = {
-    url: "./photos/getRandomNumber(1, 25).jpg",
-    description: "Description",
+    url: './photos/getRandomNumber(1, 25).jpg',
+    description: 'Description',
     likes: getRandomNumber(15, 200),
     comments: {
-      avatar: "img/avatar-(getRandomNumber(1, 6)).svg",
+      avatar: 'img/avatar-(getRandomNumber(1, 6)).svg',
       message: getRandomElement(messages),
       name: getRandomElement(names)
     }
