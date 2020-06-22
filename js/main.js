@@ -2,14 +2,6 @@
 var messages = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 var names = ['Артем', 'Дмитрий', 'Алиса', 'Влад', 'Карина'];
 
-var userDialog = document.querySelector('.container');
-
-var similarListElement = userDialog.querySelector('.setup-similar-list');
-
-var pictureTemplate = document.querySelector('#picture')
-    .content
-    .querySelector('.picture');
-
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -36,6 +28,11 @@ for (var i = 0; i < 25; i++) {
   photoDescription.push(photo);
 }
 
+var newPhoto = document.querySelector('.pictures');
+
+var pictureTemplate = document.querySelector('#picture')
+  .content
+
 var renderPhoto = function (image) {
   var photoElement = pictureTemplate.cloneNode(true);
 
@@ -52,5 +49,5 @@ for (var j = 0; j < photoDescription.length; j++) {
   fragment.appendChild(renderPhoto(photoDescription[j]));
 }
 
-similarListElement.appendChild(fragment);
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+newPhoto.appendChild(fragment);
+
