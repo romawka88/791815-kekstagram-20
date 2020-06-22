@@ -15,11 +15,11 @@ var getRandomElement = function (arr) {
 var photoDescription = [];
 for (var i = 0; i < 25; i++) {
   var photo = {
-    url: './photos/getRandomNumber(1, 25).jpg',
+    url: './photos/' + getRandomNumber(1, 25) + '.jpg',
     description: 'Description',
     likes: getRandomNumber(15, 200),
     comments: {
-      avatar: 'img/avatar-(getRandomNumber(1, 6)).svg',
+      avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
       message: getRandomElement(messages),
       name: getRandomElement(names)
     }
