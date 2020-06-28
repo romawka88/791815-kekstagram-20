@@ -11,6 +11,18 @@ var getRandomElement = function (arr) {
   return arrElement;
 };
 
+var getComments = [];
+  for (var i = 0; i < 25; i++) {
+    var comments = {
+      avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
+      message: getRandomElement(messages),
+      name: getRandomElement(names)
+    };
+
+  getComments.push(comments);
+
+}
+  console.log(getComments);
 
 var photoDescription = [];
 for (var i = 0; i < 25; i++) {
@@ -18,15 +30,14 @@ for (var i = 0; i < 25; i++) {
     url: './photos/' + getRandomNumber(1, 25) + '.jpg',
     description: 'Description',
     likes: getRandomNumber(15, 200),
-    comments: {
-      avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
-      message: getRandomElement(messages),
-      name: getRandomElement(names)
-    }
+    comments: getRandomElement(getComments)
   };
 
   photoDescription.push(photo);
+
 }
+
+console.log(photoDescription);
 
 var newPhoto = document.querySelector('.pictures');
 
@@ -39,8 +50,6 @@ var renderPhoto = function (image) {
   photoElement.querySelector('.picture__img').src = image.url;
   photoElement.querySelector('.picture__likes').textContent = image.likes;
   photoElement.querySelector('.picture__comments').textContent = image.comments;
-
-  return photoElement;
 };
 
 var fragment = document.createDocumentFragment();
