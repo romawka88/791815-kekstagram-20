@@ -11,20 +11,21 @@ var getRandomElement = function(arr) {
     return arrElement;
 };
 
-var getComments = [];
+var comments = function() {
 for (var i = 0; i < 25; i++) {
-    var comments = {
+    var comment = {
         avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
         message: getRandomElement(messages),
         name: getRandomElement(names)
     };
-    var comment = "";
-    for (var x in comments) {
-        comment += comments[x] + " ";
+    var comm = "";
+    for (var x in comment) {
+        comm += comment[x] + " ";
     }
-    getComments.push(comment);
+    return comm;
 }
-console.log(getComments);
+};
+console.log(comments());
 
 var photoDescription = [];
 for (var i = 0; i < 25; i++) {
@@ -32,7 +33,7 @@ for (var i = 0; i < 25; i++) {
         url: './photos/' + getRandomNumber(1, 25) + '.jpg',
         description: 'Description',
         likes: getRandomNumber(15, 200),
-        comments: getRandomElement(getComments)
+        comment: comments()
     };
 
     photoDescription.push(photo);
@@ -50,7 +51,7 @@ var renderPhoto = function(image) {
 
     photoElement.querySelector('.picture__img').src = image.url;
     photoElement.querySelector('.picture__likes').textContent = image.likes;
-    photoElement.querySelector('.picture__comments').textContent = image.comments;
+    photoElement.querySelector('.picture__comments').textContent = image.comment;
 
     return photoElement;
 };
