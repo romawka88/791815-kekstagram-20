@@ -47,7 +47,7 @@ uploadPhoto();
 var newPhoto = document.querySelector('.pictures');
 
 var pictureTemplate = document.querySelector('#picture')
-  .content
+    .content;
 
 var renderPhoto = function(image) {
   var photoElement = pictureTemplate.cloneNode(true);
