@@ -30,7 +30,7 @@ var getComments = function() {
 var uploadPhoto = function() {
     for (var i = 0; i < PHOTOS_AMOUNT; i++) {
         var photo = {
-            url: './photos/' + getRandomNumber(1, PHOTOS_AMOUNT) + '.jpg',
+            url: './photos/' + (i + 1) + '.jpg',
             description: 'Description',
             likes: getRandomNumber(15, 200),
             comments: getComments()
