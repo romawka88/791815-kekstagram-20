@@ -66,3 +66,29 @@ for (var j = 0; j < PHOTOS.length; j++) {
 }
 
 newPhoto.appendChild(fragment);
+
+var bigPicture = document.querySelector('.big-picture');
+var socialComment = document.querySelector('.social__comment-count');
+var commentsLoader = document.querySelector('.comments-loader');
+var body = document.querySelector('body');
+bigPicture.classList.remove('hidden');
+socialComment.classList.add('hidden');
+commentsLoader.classList.add('hidden');
+body.classList.add ('modal-open');
+
+var renderPhotoInformation = function (image) {
+
+  for (var i = 0; i < PHOTOS_AMOUNT; i++) {
+    bigPicture.querySelector('.big-picture__img img').src = image.url;
+    bigPicture.querySelector('.likes-count').textContent = image.likes;
+    bigPicture.querySelector('.comments-count').textContent = image.comments.length;
+    bigPicture.querySelector('.social__picture').src = image.comments[i].avatar;
+    bigPicture.querySelector('.social__picture').alt = image.comments[i].name;
+    bigPicture.querySelector('.social__text').textContent = image.comments[i].message;
+    bigPicture.querySelector('.social__caption').textContent = image.description;
+
+  return bigPicture;
+  }
+};
+
+renderPhotoInformation(PHOTOS[0]);
