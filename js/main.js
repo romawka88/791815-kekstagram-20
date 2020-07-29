@@ -166,90 +166,88 @@ var elem = document.querySelector('.effect-level__line');
 var pinElem = document.querySelector('.effect-level__pin');
 var effectLevel = document.querySelector('.effect-level__value');
 
-var mouseup = function (clientX,startClientX) {
-    var pinCoords = pinElem.getBoundingClientRect();
-    var sliderCoords = elem.getBoundingClientRect();
-    var shiftX = startClientX - pinCoords.left;
-    var sliderWidth = elem.right - elem.left;
-    console.log(sliderWidth);
-    var newLeft = clientX - shiftX - sliderCoords.left;
-    var proportion = newLeft / sliderWidth;
+var mouseup = function (evt) {
+  var newLeft = pinElem.offsetLeft;
 
-    if (newLeft < 0) {
-      newLeft = 0;
-  }
+  pinElem.style.left = newLeft + 'px';
 
-    var rightEdge = elem.offsetWidth - pinElem.offsetWidth;
-
-    if (newLeft > rightEdge) {
-        newLeft = rightEdge;
-    }
-
-    pinElem.style.left = newLeft + 'px';
-};
+  return newLeft;
+}
 
 elem.classList.add('visually-hidden');
 
-var setEffect = function (evt,clientX,startClientX) {
-  var evt = evt || window.evt;
-  var button = evt.target || evt.srcElement;
+var setEffect = function (evt) {
+  var button = evt.target;
+  var sliderWidth = elem.offsetWidth;
 
   switch (button.id) {
   case 'effect-none' :
     imgPic.setAttribute("class", "effects__preview--none");
-    document.querySelector('.img-upload__preview').style.filter = 'none';
+    imgPic.style.filter = 'none';
     elem.classList.add('visually-hidden');
     break;
 
   case 'effect-chrome' :
     elem.classList.remove('visually-hidden');
+    sliderWidth = elem.offsetWidth;
+    effectLevel.setAttribute('value', 100);
+    pinElem.style.left = sliderWidth + 'px';
     imgPic.setAttribute("class", "effects__preview--chrome");
-    document.querySelector('input[name="effect-level"]').value = parseInt(100 + '%');
-    document.querySelector('.img-upload__preview').style.filter = 'grayscale(' + mouseup(clientX,startClientX)*10 + ')';
+    imgPic.style.filter = 'grayscale(' + (mouseup(evt) / sliderWidth) + ')';
     break;
 
   case 'effect-sepia' :
-    imgPic.setAttribute("class", "effects__preview--sepia");
-    document.querySelector('.img-upload__preview').style.filter = 'sepia(' + mouseup(clientX,startClientX)*10 + ')';
     elem.classList.remove('visually-hidden');
+    sliderWidth = elem.offsetWidth;
+    effectLevel.setAttribute('value', 100);
+    pinElem.style.left = sliderWidth + 'px';
+    imgPic.setAttribute("class", "effects__preview--sepia");
+    imgPic.style.filter = 'sepia(' + (mouseup(evt) / sliderWidth) + ')';
     break;
 
   case 'effect-marvin' :
-    imgPic.setAttribute("class", "effects__preview--marvin");
-    document.querySelector('.img-upload__preview').style.filter = 'invert(' + mouseup(clientX,startClientX)*100 + '%)';
     elem.classList.remove('visually-hidden');
+    sliderWidth = elem.offsetWidth;
+    effectLevel.setAttribute('value', 100);
+    pinElem.style.left = sliderWidth + 'px';
+    imgPic.setAttribute("class", "effects__preview--marvin");
+    imgPic.style.filter = 'invert(' + ((100 * mouseup(evt)) / sliderWidth) + '%)';
     break;
 
   case 'effect-phobos' :
-    imgPic.setAttribute("class", "effects__preview--phobos");
-    document.querySelector('.img-upload__preview').style.filter = 'blur(' + mouseup(clientX,startClientX)*30 + 'px)';
     elem.classList.remove('visually-hidden');
+    sliderWidth = elem.offsetWidth;
+    effectLevel.setAttribute('value', 100);
+    pinElem.style.left = sliderWidth + 'px';
+    imgPic.setAttribute("class", "effects__preview--phobos");
+    imgPic.style.filter = 'blur(' + ((3 * mouseup(evt)) / sliderWidth) + 'px)';
     break;
 
   case 'effect-heat':
-    imgPic.setAttribute("class", "effects__preview--heat");
-    document.querySelector('.img-upload__preview').style.filter = 'brightness(' + mouseup(clientX,startClientX)*30 + ')';
     elem.classList.remove('visually-hidden');
+    sliderWidth = elem.offsetWidth;
+    effectLevel.setAttribute('value', 100);
+    pinElem.style.left = sliderWidth + 'px';
+    imgPic.setAttribute("class", "effects__preview--heat");
+    imgPic.style.filter = 'brightness(' + (((2 * mouseup(evt)) / sliderWidth) + 1) + ')';
     break;
 }
 };
 
-document.querySelector('.effects__list').addEventListener('click', function (evt,clientX,startClientX) {
-  setEffect(evt,clientX,startClientX);
+document.querySelector('.effects__list').addEventListener('click', function (evt) {
+  setEffect(evt);
 });
 
 pinElem.addEventListener('mouseup', mouseup);
 
 
 document.querySelector('.text__hashtags').addEventListener('input', function() {
-  var re = /^[#а-яА-Яa-zA-Z0-9]*$/;
-  var hashtag = [];
-  var validation = document.querySelector('.text__hashtags').value;
-  var characterArray = validation.split('');
+  var re = /^#[а-яА-Яa-zA-Z0-9]*$/;
+  var hashtag = document.querySelector('.text__hashtags').value;
+  var characterArray = hashtag.split('');
+
   for (var i = 0; i < hashtag.length; i++) {
-    var str = characterArray[i];
-    hashtag.push(str);
-};
-console.log(hashtag);
-  var val = hashtag.test(re) === true ? document.querySelector('.text__hashtags').setCustomValidity('go') : document.querySelector('.text__hashtags').setCustomValidity('wrong hashtag');
+    re.test(characterArray[i]) ? document.querySelector('.text__hashtags').setCustomValidity('go') : document.querySelector('.text__hashtags').setCustomValidity('wrong hashtag');
+  };
+
 });
