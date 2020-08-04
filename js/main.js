@@ -242,7 +242,7 @@ pinElem.addEventListener('mouseup', mouseup);
 
 
 document.querySelector('.text__hashtags').addEventListener('input', function() {
-  var re = /^#[а-яА-Яa-zA-Z0-9]*$/;
+  var re = /^#[а-яА-Яa-zA-Z0-9]{0,20}+( #[а-яА-Яa-zA-Z0-9]{0,20}+)*$/;
   var hashtag = document.querySelector('.text__hashtags').value;
   var characterArray = hashtag.split('');
 
