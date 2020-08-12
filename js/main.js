@@ -240,14 +240,43 @@ document.querySelector('.effects__list').addEventListener('click', function (evt
 
 pinElem.addEventListener('mouseup', mouseup);
 
+var addHashtagValidation = function () {
+  document.querySelector('.text__hashtags').addEventListener('input', function () {
+    var re = /^#[а-яА-Яa-zA-Z0-9]{0,20}$/;
+    var hashtagsArray = this.value.split(' ');
 
-document.querySelector('.text__hashtags').addEventListener('input', function() {
-  var re = /^#[а-яА-Яa-zA-Z0-9]{0,20}+( #[а-яА-Яa-zA-Z0-9]{0,20}+)*$/;
-  var hashtag = document.querySelector('.text__hashtags').value;
-  var characterArray = hashtag.split('');
+    if (hashtagsArray.length > 5) {
+      this.setCustomValidity('hashtags amount > 5');
+      return;
+    }
 
-  for (var i = 0; i < hashtag.length; i++) {
-    re.test(characterArray[i]) ? document.querySelector('.text__hashtags').setCustomValidity('go') : document.querySelector('.text__hashtags').setCustomValidity('wrong hashtag');
-  };
+    for (var i = 0; i < hashtagsArray.length; i++) {
+      if (re.test(hashtagsArray[i]) && hashtagsArray[i] !='#') {
+        this.setCustomValidity('');
+      } else {
+        this.setCustomValidity('wrong hashtag');
+        break;
+      }
+    }
 
-});
+   removeDuplicates(hashtagsArray);
+
+  });
+}
+
+var removeDuplicates = function (hashtagsArray) {
+
+firstCycle:
+for (var i = 0; i < hashtagsArray.length - 1; i++) {
+  secondCycle:
+  for (var j = i + 1; j < hashtagsArray.length; j++) {
+    if (hashtagsArray[i] === hashtagsArray[j]) {
+      document.querySelector('.text__hashtags').setCustomValidity('duplicate hashtag');//error
+      break firstCycle;
+      break secondCycle;
+    }
+  }
+}
+};
+
+addHashtagValidation();
